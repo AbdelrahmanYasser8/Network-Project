@@ -84,7 +84,7 @@
 
 ## 🔴 REMAINING
 
-- Part 6 — NAT (Dynamic PAT + Static NAT)
+- Part 6 — NAT (Dynamic PAT + Static NAT) — done except final verification (Step 5 ping tests need troubleshooting)
 - Part 7 — Network Management (NTP, Syslog, DNS, Email, Web)
 - Part 8 — Site-to-Site IPsec VPN (MIU-GW Branch-GW)
 - Part 9 — Wireless Home Router
