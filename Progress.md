@@ -72,24 +72,26 @@
 
 ## ✅ COMPLETED
 
-- Basic config (hostname, no ip domain-lookup, service password-encryption, MOTD, SSH)
+- Basic config (hostname, no ip domain-lookup, service password-encryption, MOTD)
+- SSH configured on all routers & L3 switches (MIU-GW, Branch-GW, ISP, all MLS, SW-S)
 - All IP addressing on all devices
 - VLANs + Access ports for all buildings
 - EtherChannels (LACP) between MLS access switches and access switches each other
 - Static routing (default routes on all MLS MIU-GW, routes on MIU-GW all buildings)
 - Part 4 Routing Protocols: OSPF (100) on MIU-GW/Main-MLS/S-MLS, EIGRP (AS 10) on MIU-GW/N-MLS/R-MLS, Redistribution on MIU-GW
 - Part 5 DHCP: Pools on Main-MLS (VLAN110,120,25,140), Branch-GW (B-LAN2, B-LAN3), all PCs getting IPs, IP helpers configured
+- Part 6 NAT (Dynamic PAT + Static NAT)
+- Part 7: NTP, Syslog, DNS, Web Server
 
 ---
 
-## 🔴 REMAINING
+## 🔴 REMAINING / ISSUES
 
-- Part 6 — NAT (Dynamic PAT + Static NAT) — done except final verification (Step 5 ping tests need troubleshooting)
-- Part 7 — Network Management (NTP, Syslog, DNS, Email, Web)
-- Part 8 — Site-to-Site IPsec VPN (MIU-GW Branch-GW)
-- Part 9 — Wireless Home Router
-- Part 10 — Verify Connectivity (screenshots)
-- Part 11 — Documentation
+- Part 7: Email ❌ (PT bug — TCP connection timeout between Branch and Email Server)
+- Part 8: Site-to-Site IPsec VPN ❌ (one-way tunnel only — PT NAT-before-crypto bug)
+- Part 9: Wireless Home Router ❌ (pending)
+- Part 10: Verify Connectivity (screenshots)
+- Part 11: Documentation
 
 ---
 
@@ -102,3 +104,6 @@
 - OSPF process 100 on MIU-GW + Main-MLS + S-MLS
 - EIGRP AS 10 on MIU-GW + N-MLS + R-MLS
 - Redistribution on MIU-GW
+- SSH: `ip domain-name`, `crypto key generate rsa`, `username admin privilege 15 secret cisco`, `ip ssh version 2`, `line vty 0 15 transport input ssh login local`
+- NAT: `access-list 1` deny Branch subnets + server subnet, permit internal subnets, `ip nat inside source list 1 pool PUBLIC overload`
+- Static NAT: `ip nat inside source static 10.0.1.21 209.165.200.228`
